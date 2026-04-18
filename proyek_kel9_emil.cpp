@@ -82,6 +82,7 @@ void muatBuku() {
 
     fclose(file);
     // ini contoh aja
-    //apa tuh
+    //apa tuhh
+    // komen apa gitu bebas
 }
 
