@@ -3,9 +3,6 @@
 #include <cstring>
 using namespace std;
 
-// =============================================
-// STRUKTUR NODE LINKED LIST
-// =============================================
 struct Buku {
     int id;
     char judul[100];
@@ -24,24 +21,20 @@ struct Transaksi {
     Transaksi* next;
 };
 
-// =============================================
-// HEAD LINKED LIST & COUNTER
-// =============================================
+//ini buat nandain kepala node buku sama node transaksinya, yang nanti bisa di geser2 kalo ada update data
 Buku*      headBuku      = NULL;
 Transaksi* headTransaksi = NULL;
 int jumlahBuku      = 0;
 int jumlahTransaksi = 0;
 
-// =============================================
-// FUNGSI SIMPAN & MUAT FILE
-// =============================================
+//ini buat nyimpen update an buku kalo abis ada update data
 void simpanBuku() {
     FILE* file = fopen("buku.txt", "w");
     if (file == NULL) {
         cout << "Gagal membuka file!" << endl;
         return;
     }
-
+    
     fprintf(file, "%d\n", jumlahBuku);
 
     Buku* curr = headBuku;
@@ -57,6 +50,7 @@ void simpanBuku() {
     fclose(file);
 }
 
+//ini buat nampilin data buku yang ada di filenya
 void muatBuku() {
     FILE* file = fopen("buku.txt", "r");
     if (file == NULL) return;
@@ -75,7 +69,7 @@ void muatBuku() {
         fscanf(file, "%f\n", &baru->harga);
         fscanf(file, "%d\n", &baru->stok);
 
-        // Sisipkan di akhir list
+        // Sisipin di akhir list
         if (headBuku == NULL) {
             headBuku = baru;
         } else {
