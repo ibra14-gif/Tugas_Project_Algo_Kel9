@@ -81,5 +81,6 @@ void muatBuku() {
     }
 
     fclose(file);
+    // ini contoh aja
 }
 
