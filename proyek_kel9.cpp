@@ -128,6 +128,17 @@ void muatTransaksi() {
     fclose(f);
 }
 
+// Fungsi buat nyusun ulang ID dari 1 setelah ada penghapusan
+void susunUlangID() {
+    int nomor = 1;
+    Buku* curr = headBuku;
+    while (curr != NULL) {
+        curr->id = nomor;
+        nomor++;
+        curr = curr->next;
+    }
+}
+
 void tambahBuku() {
     Buku* baru = new Buku();
     baru->id = jumlahBuku + 1;
@@ -173,9 +184,10 @@ void tampilkanBuku() {
 
     Buku* curr = headBuku;
     while (curr != NULL) {
-        // %-20s  = teks rata kiri, lebar 20 karakter
-        // %10.0f = angka desimal, lebar 10, tanpa koma
-        // %5d    = angka bulat, lebar 5
+		// %-2d = angka bulat, lebar 2, rata kiri
+        // %-20.20s = teks rata kiri, lebar 20 karakter, potong jika lebih dari 20 karakter
+        // %7.0f = angka desimal, lebar 7, tanpa koma
+        // %5d = angka bulat, lebar 5, rata kanan
         printf("| %-2d | %-30.30s | %-20.20s | Rp %7.0f | %5d |\n",
             curr->id,
             curr->judul,
@@ -253,6 +265,7 @@ void hapusBuku() {
 
     delete curr;
     jumlahBuku--;
+    susunUlangID();
     simpanBuku();
     cout << "Buku berhasil dihapus!\n";
 }
@@ -482,6 +495,7 @@ int main() {
 		cout << "+==============================+\n";
 		cout << "  Pilih: ";
         cin >> pilih;
+		cout << "\n";
 
         switch (pilih) {
             case 1: tambahBuku();    break;
